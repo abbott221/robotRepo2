@@ -14,6 +14,15 @@ typedef enum
     tVoid
 } TypeEnum;
 
+typedef enum
+{
+    STRAIGHT = 0,
+    LEFT,
+    RIGHT,
+    BACKWARDS,
+    STOP
+} PMode;
+
 
 
 
@@ -109,12 +118,70 @@ class menu
 
 
 
+class RPScleaner
+{
+    public:
+        RPScleaner();
 
+        //set initial move values
+        void initiateMoveData();
+        //set current values
+        //stalls out after x time?
+        //continues to scan until values aren't 0,0,0
+        //SETTER method
+        void update();
+
+        //DO INTERNAL CALLS NEED [THIS.]METHOD();???
+
+        //called internally, avoid externally
+        //checks for 0,0,0
+        bool currentValuesAreLegit();
+
+        //sets X displacement
+        void compareX(float supposedValue);
+        //sets Y displacement
+        void compareY(float supposedValue);
+        //sets Angle displacement
+        void compareAngle(float supposedValue);
+
+
+
+        float getInitX();
+        float getInitY();
+        float getInitAngle();
+
+        float getCurrentX();
+        float getCurrentY();
+        float getCurrentAngle();
+
+        float getDisplacementX();
+        float getDisplacementY();
+        float getDisplacementAngle();
+
+
+    private:
+        float initX;
+        float initY;
+        float initAngle;
+
+        float currentX;
+        float currentY;
+        float currentAngle;
+
+        float displacementX;
+        float displacementY;
+        float displacementAngle;
+};
+
+
+
+
+extern RPScleaner cleaner;
 
 
 
 extern robot chet;
-
+extern PMode currentPowerMode;
 
 
 

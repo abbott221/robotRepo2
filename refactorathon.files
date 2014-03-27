@@ -3,3 +3,14 @@ main.cpp
 FEHGUI.cpp
 FEHGUI.h
 main.h
+
+driveHeaders.h
+driveMethods.cpp
+driveMethodsRPS.cpp
+driveProcess.cpp
+
+corrective.cpp
+corrective.h
+
+random.cpp
+random.h

@@ -26,7 +26,57 @@ FEHBattery lolBattery (FEHIO::BATTERY_VOLTAGE);
 
 //======================================
 
+
+
+
+int leftPower = 80;
+int rightPower = 78;
+
+int tempLeftPower = 80;
+int tempRightPower = 78;
+
+int servoMin = 556;
+int servoMax = 2500;
+
+//for the encoders
+float lowThresh = 0.388;
+float highThresh = 1.547;
+
+//for line following
+float optoThresh = 2.0;
+float bLineDifThresh = 1.0;
+float yLineDifThresh = .4;
+float leftOptoThresh = 0.0;
+float rightOptoThresh = 0.0;
+float midOptoThresh = 0.0;
+
+bool configLightStart = true;
+bool configCourseTimer = true;
+bool configDelay = true;
+bool configRPS = true;
+
+double displayRate = 0.2;
+
+double courseStartTime = 0.0;
+int numOfDisplays = 0;
+
+PMode currentPowerMode = STOP;
+int leftPowerMode = leftPower;
+int rightPowerMode = rightPower;
+
+float decisionLight = 0.0;
+
+int currentMove = 0;
+
+
+
 robot chet;
+RPScleaner cleaner;
+
+
+
+void driveProcess(movement moves[]);
+
 
 
 int main(void)
@@ -116,7 +166,7 @@ void MainMenuCall()
             break;
         //Option 1: Run
         case 1:
-            LCD.WriteLine( "Settings" );
+            driveProcess(chet.moreMoves);
             break;
         //Option 2: Adjust (Set) Movement
         case 2:
