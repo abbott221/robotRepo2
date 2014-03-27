@@ -18,7 +18,7 @@
 #include "driveHeaders.h"
 #include "corrective.h"
 #include "random.h"
-
+#include "setStuff.h"
 
 
 
@@ -87,6 +87,7 @@ extern FEHBattery lolBattery;
 
 
 void MainMenuCall();
+void ConfigureMenuCall();
 
 
 

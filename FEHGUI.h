@@ -80,6 +80,7 @@ class option
         //dataType is set automatically by the following 2 methods
         void setOption(int dLine, const char *dName);
         void setOption(int dLine, movement dOptionMovement);
+        void setState(bool state);
 
         //getters
         TypeEnum getDataType();
@@ -108,9 +109,15 @@ class menu
         int UserInterface();
         void drawCursor(int pixHeight);
 
+        int pageAndMoveInterface(movement moreMoves[]);
+        int pageInterface();
+        int moveTypeInterface();
+        int moveInterface(movement moves[]);
+
+        option * selection;
+
     private:
         int selectionSize;
-        option * selection;
 };
 
 

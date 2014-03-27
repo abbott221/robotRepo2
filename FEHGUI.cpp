@@ -169,6 +169,18 @@ void option::setOption(int dLine, movement dOptionMove)
     //optionMovement.setMovement(dOptionMove.getType(), dOptionMove.getDoubleValue());
 }
 
+void option::setState(bool dState)
+{
+    if (dState == true)
+    {
+        optionState = true;
+    }
+    else
+    {
+        optionState = false;
+    }
+}
+
 
 
 

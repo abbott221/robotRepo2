@@ -14,3 +14,8 @@ corrective.h
 
 random.cpp
 random.h
+
+userInterface.cpp
+
+setStuff.h
+setStuff.cpp
