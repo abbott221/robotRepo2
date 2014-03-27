@@ -61,6 +61,17 @@ void movement::setMovement(int dOperation)
     movementState = true;
 }
 
+void movement::setMovement(movement otherMove)
+{
+    operation = otherMove.getOperation();
+    dataType = otherMove.getDataType();
+    intValue = otherMove.getIntValue();
+    floatValue = otherMove.getFloatValue();
+    doubleValue = otherMove.getDoubleValue();
+    //no voidValue
+    movementState = otherMove.getState();
+}
+
 void movement::setState(bool dState)
 {
     if (dState == true)
@@ -141,7 +152,7 @@ robot::robot()
 
 option::option()
 {
-    dataType = tVoid;
+    dataType = tString;
     line = 0;
     name = "";
     optionMovement;
@@ -165,8 +176,16 @@ void option::setOption(int dLine, movement dOptionMove)
 {
     dataType = dOptionMove.getDataType();
     line = dLine;
-    optionMovement = dOptionMove;
-    //optionMovement.setMovement(dOptionMove.getType(), dOptionMove.getDoubleValue());
+    optionMovement.setMovement(dOptionMove);
+}
+
+void option::setOption(option dOption)
+{
+    dataType = dOption.getDataType();
+    line = dOption.getLine();
+    name = dOption.getName();
+    optionMovement = dOption.getMovement();
+    optionState = dOption.getState();
 }
 
 void option::setState(bool dState)
@@ -202,6 +221,11 @@ const char * option::getName()
     return name;
 }
 
+movement option::getMovement()
+{
+    return optionMovement;
+}
+
 bool option::getState()
 {
     return optionState;
@@ -215,37 +239,41 @@ bool option::getState()
 
 void option::display()
 {
+    TypeEnum tempDataType = optionMovement.getDataType();
+
+
     if (dataType == tString)
     {
         LCD.WriteLine(name);
     }
-    else if (dataType == tInt)
+    else if (tempDataType == tInt)
     {
         LCD.Write("  Type: ");
         LCD.Write(optionMovement.getOperation());
         LCD.Write("  Int: ");
         LCD.WriteLine(optionMovement.getIntValue());
     }
-    else if (dataType == tFloat)
+    else if (tempDataType == tFloat)
     {
         LCD.Write("  Type: ");
         LCD.Write(optionMovement.getOperation());
         LCD.Write("  Flo: ");
         LCD.WriteLine(optionMovement.getFloatValue());
     }
-    else if (dataType == tDouble)
+    else if (tempDataType == tDouble)
     {
         LCD.Write("  Type: ");
         LCD.Write(optionMovement.getOperation());
         LCD.Write("  Dou: ");
         LCD.WriteLine(optionMovement.getDoubleValue());
     }
-    else if (dataType == tVoid)
+    else if (tempDataType == tVoid)
     {
         LCD.Write("  Type: ");
         LCD.Write(optionMovement.getOperation());
         LCD.Write("  Void");
     }
+
 }
 
 
@@ -277,7 +305,7 @@ void menu::addOption(const char *dLine)
 
     for (int i = 0; i < selectionSize; i++)
     {
-        tempSelection[i].setOption(i+1, selection[i].getName());
+        tempSelection[i].setOption(selection[i]);
     }
 
     //add the new option
@@ -291,7 +319,33 @@ void menu::addOption(const char *dLine)
     //copy the data back into selection
     for (int i = 0; i < selectionSize; i++)
     {
-        selection[i].setOption(i+1, tempSelection[i].getName());
+        selection[i].setOption(tempSelection[i]);
+    }
+}
+
+void menu::addOption(movement dMovement)
+{
+    //a temporary holder of the data
+    option tempSelection[selectionSize + 1];
+
+
+    for (int i = 0; i < selectionSize; i++)
+    {
+        tempSelection[i].setOption(selection[i]);
+    }
+
+    //add the new option
+    tempSelection[selectionSize].setOption(selectionSize, dMovement);
+    selectionSize += 1;
+
+
+    //resize selection
+    selection = new option[selectionSize];
+
+    //copy the data back into selection
+    for (int i = 0; i < selectionSize; i++)
+    {
+        selection[i].setOption(tempSelection[i]);
     }
 }
 

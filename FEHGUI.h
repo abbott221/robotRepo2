@@ -36,6 +36,8 @@ class movement
         void setMovement(int dOperation, float dValue);
         void setMovement(int dOperation, double dValue);
         void setMovement(int dOperation);
+        //***move.setMove(otherMove)
+        void setMovement(movement otherMove);
         void setState(bool state);
 
         int getOperation();
@@ -80,12 +82,14 @@ class option
         //dataType is set automatically by the following 2 methods
         void setOption(int dLine, const char *dName);
         void setOption(int dLine, movement dOptionMovement);
+        void setOption(option dOption);
         void setState(bool state);
 
         //getters
         TypeEnum getDataType();
         int getLine();
         const char * getName();
+        movement getMovement();
         bool getState();
 
         void display();
@@ -105,6 +109,7 @@ class menu
     public:
         menu();
         void addOption(const char * dLine);
+        void addOption(movement dMovement);
 
         int UserInterface();
         void drawCursor(int pixHeight);

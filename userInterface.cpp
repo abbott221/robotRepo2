@@ -12,6 +12,7 @@ int menu::pageAndMoveInterface(movement moreMoves[])
     LCD.Clear( FEHLCD::Black );
     LCD.SetFontColor( FEHLCD::White );
 
+    //next possible point of error
     pageChoice = pageInterface();
 
     movement tempMoves[12];
@@ -19,13 +20,20 @@ int menu::pageAndMoveInterface(movement moreMoves[])
 
     for (int i = 0; i < 12; i++)
     {
-        tempMoves[i] = moreMoves[i + (12 * pageChoice)];
+        int tempCurrentMove = i + (12 * pageChoice);
+
+
+
+        tempMoves[i].setMovement(chet.moreMoves[tempCurrentMove]);
+
     }
 
     LCD.Clear( FEHLCD::Black );
     LCD.SetFontColor( FEHLCD::White );
 
+    //error is here - nope
     moveChoice = moveInterface(tempMoves);
+
     moveChoice = moveChoice + (12 * pageChoice);
 
     return moveChoice;
@@ -103,35 +111,16 @@ int menu::moveInterface(movement moves[])
 
     for (int i = 0; i < 12; i++)
     {
-        if (moves[i].getDataType() == tInt)
-        {
-            tempMove.setMovement(moves[i].getOperation(), moves[i].getIntValue());
-            moveMenu.addOption("temp");
-            moveMenu.selection[i].setOption( (i+2), tempMove );
-            moveMenu.selection[i].setState( moves[i].getState() );
-        }
-        else if (moves[i].getDataType() == tFloat)
-        {
-            tempMove.setMovement(moves[i].getOperation(), moves[i].getFloatValue());
-            moveMenu.addOption("temp");
-            moveMenu.selection[i].setOption( (i+2), tempMove );
-            moveMenu.selection[i].setState( moves[i].getState() );
-        }
-        else if (moves[i].getDataType() == tDouble)
-        {
-            tempMove.setMovement(moves[i].getOperation(), moves[i].getDoubleValue());
-            moveMenu.addOption("temp");
-            moveMenu.selection[i].setOption( (i+2), tempMove );
-            moveMenu.selection[i].setState( moves[i].getState() );
-        }
-        else if (moves[i].getDataType() == tVoid)
-        {
-            tempMove.setMovement(moves[i].getOperation());
-            moveMenu.addOption("temp");
-            moveMenu.selection[i].setOption( (i+2), tempMove );
-            moveMenu.selection[i].setState( moves[i].getState() );
-        }
+
+        tempMove.setMovement(moves[i]);
+
+
+        moveMenu.addOption("temp");
+        moveMenu.selection[i].setOption( moveMenu.selection[i].getLine(), tempMove );
+        moveMenu.selection[i].setState( moves[i].getState() );
+
     }
+
 
     moveChoice = moveMenu.UserInterface();
 

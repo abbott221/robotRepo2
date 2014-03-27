@@ -78,13 +78,19 @@ RPScleaner cleaner;
 void driveProcess(movement moves[]);
 
 
+//===================================================
+
+int mainChoice = -1;
+menu mainMenu;
+
 int pageChoice = -1;
 menu pageMenu;
 
 int configureChoice = -1;
 menu configureMenu;
 
-
+int operationChoice = -1;
+menu operationMenu;
 
 int main(void)
 {
@@ -129,43 +135,29 @@ int main(void)
 
 
 
-    while (true)
-    {
-        MainMenuCall();
-    }
-
-    return 0;
-}
 
 
 
-void MainMenuCall()
-{
-    int mainChoice;
-    menu main;
     //choice 0
-    main.addOption("  PLACE HOLDER :)");
+    mainMenu.addOption("  PLACE HOLDER :)");
     //choice 1
-    main.addOption("  Run");
+    mainMenu.addOption("  Run");
     //choice 2
-    main.addOption("  Adjust Movement");
+    mainMenu.addOption("  Adjust Movement");
     //choice 3
-    main.addOption("  Display Movements");
+    mainMenu.addOption("  Display Movements");
     //choice 4
-    main.addOption("  Insert Movement");
+    mainMenu.addOption("  Insert Movement");
     //choice 5
-    main.addOption("  Turn On Movement");
+    mainMenu.addOption("  Turn On Movement");
     //choice 6
-    main.addOption("  Turn Off Movement");
+    mainMenu.addOption("  Turn Off Movement");
     //choice 7
-    main.addOption("  Turn On Page");
+    mainMenu.addOption("  Turn On Page");
     //choice 8
-    main.addOption("  Turn Off Page");
+    mainMenu.addOption("  Turn Off Page");
     //choice 9
-    main.addOption("  Calibrate/Configure");
-
-    mainChoice = main.UserInterface();
-
+    mainMenu.addOption("  Calibrate/Configure");
 
 
 
@@ -191,6 +183,30 @@ void MainMenuCall()
 
 
 
+
+
+
+
+
+    while (true)
+    {
+        MainMenuCall();
+    }
+
+    return 0;
+}
+
+
+
+void MainMenuCall()
+{
+
+
+    mainChoice = mainMenu.UserInterface();
+
+
+
+
     int typeChoice;
     int moveChoice;
 
@@ -201,23 +217,31 @@ void MainMenuCall()
 
 
 
-    switch (mainChoice)
-    {
     //option 0: in case your finger slips
-    case 0:
-        break;
+    if (mainChoice == 0)
+    {
+        //
+    }
+
+
+
     //Option 1: Run
-    case 1:
+    else if (mainChoice == 1)
+    {
         driveProcess(chet.moreMoves);
-        break;
+    }
+
+
+
     //Option 2: Adjust (Set) Movement
-    case 2:
-        moveChoice = main.pageAndMoveInterface(chet.moreMoves);
+    else if (mainChoice == 2)
+    {
+        moveChoice = mainMenu.pageAndMoveInterface(chet.moreMoves);
 
 
 
         //USER INTERFACE: MOVEMENT TYPE SELECTION
-        typeChoice = main.moveTypeInterface();
+        typeChoice = mainMenu.moveTypeInterface();
 
 
 
@@ -297,13 +321,21 @@ void MainMenuCall()
 
             chet.moreMoves[moveChoice].setMovement(typeChoice, tempDoubleValue);
         }
-        break;
+    }
+
+
+
     //Option 3: Display movements
-    case 3:
-        main.pageAndMoveInterface(chet.moreMoves);
-        break;
+    else if (mainChoice == 3)
+    {
+        mainMenu.pageAndMoveInterface(chet.moreMoves);
+    }
+
+
+
     //Option 4: Insert movement
-    case 4:
+    else if (mainChoice == 4)
+    {
         LCD.WriteLine("Enter num of move (0-142)");
 
 
@@ -325,21 +357,33 @@ void MainMenuCall()
         }
         chet.moreMoves[tempNum].setMovement(0, 0.0);
         chet.moreMoves[tempNum].setState(false);
-        break;
+    }
+
+
+
     //Option 5: Turn on (Old Add) movement
-    case 5:
-        moveChoice = main.pageAndMoveInterface(chet.moreMoves);
+    else if (mainChoice == 5)
+    {
+        moveChoice = mainMenu.pageAndMoveInterface(chet.moreMoves);
 
         chet.moreMoves[moveChoice].setState(true);
-        break;
+    }
+
+
+
     //Option 6: Turn off (Old Delete) Movement
-    case 6:
-        moveChoice = main.pageAndMoveInterface(chet.moreMoves);
+    else if (mainChoice == 6)
+    {
+        moveChoice = mainMenu.pageAndMoveInterface(chet.moreMoves);
 
         chet.moreMoves[moveChoice].setState(false);
-        break;
+    }
+
+
+
     //Option 7: Add page
-    case 7:
+    else if (mainChoice == 7)
+    {
         LCD.Clear( FEHLCD::Black );
         LCD.SetFontColor( FEHLCD::White );
 
@@ -355,9 +399,13 @@ void MainMenuCall()
         }
 
         pageMenu.selection[pageChoice].setState(true);
-        break;
+    }
+
+
+
     //Option 8: Delete Page
-    case 8:
+    else if (mainChoice == 8)
+    {
         LCD.Clear( FEHLCD::Black );
         LCD.SetFontColor( FEHLCD::White );
 
@@ -373,14 +421,16 @@ void MainMenuCall()
         }
 
         pageMenu.selection[pageChoice].setState(false);
-        break;
-    //Option 9: Calibrate/Configure
-    case 9:
-        ConfigureMenuCall();
-        break;
-    default:
-        LCD.WriteLine( "Error" );
     }
+
+
+
+    //Option 9: Calibrate/Configure
+    else if (mainChoice == 9)
+    {
+        ConfigureMenuCall();
+    }
+
 }
 
 
