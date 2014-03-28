@@ -309,7 +309,7 @@ void menu::addOption(const char *dLine)
     }
 
     //add the new option
-    tempSelection[selectionSize].setOption(selectionSize, dLine);
+    tempSelection[selectionSize].setOption( (selectionSize+1), dLine);
     selectionSize += 1;
 
 
@@ -335,7 +335,7 @@ void menu::addOption(movement dMovement)
     }
 
     //add the new option
-    tempSelection[selectionSize].setOption(selectionSize, dMovement);
+    tempSelection[selectionSize].setOption( (selectionSize+1), dMovement);
     selectionSize += 1;
 
 

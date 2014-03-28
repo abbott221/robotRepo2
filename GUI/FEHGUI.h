@@ -192,6 +192,20 @@ extern RPScleaner cleaner;
 
 
 
+extern int mainChoice;
+extern menu mainMenu;
+
+extern int pageChoice;
+extern menu pageMenu;
+
+extern int configureChoice;
+extern menu configureMenu;
+
+extern int operationChoice;
+extern menu operationMenu;
+
+
+
 extern robot chet;
 extern PMode currentPowerMode;
 

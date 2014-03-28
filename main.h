@@ -14,11 +14,11 @@
 #include <FEHBattery.h>
 
 
-#include "FEHGUI.h"
-#include "driveHeaders.h"
-#include "corrective.h"
-#include "random.h"
-#include "setStuff.h"
+#include "GUI/FEHGUI.h"
+#include "drive/driveHeaders.h"
+#include "other/corrective.h"
+#include "other/random.h"
+#include "GUI/setStuff.h"
 
 
 

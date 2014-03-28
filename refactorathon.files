@@ -1,21 +1,20 @@
-main.cpp
 
-FEHGUI.cpp
-FEHGUI.h
+main.cpp
 main.h
 
-driveHeaders.h
-driveMethods.cpp
-driveMethodsRPS.cpp
-driveProcess.cpp
+drive/driveHeaders.h
+drive/driveMethods.cpp
+drive/driveMethodsRPS.cpp
+drive/driveProcess.cpp
 
-corrective.cpp
-corrective.h
 
-random.cpp
-random.h
+other/corrective.cpp
+other/corrective.h
+other/random.cpp
+other/random.h
 
-userInterface.cpp
-
-setStuff.h
-setStuff.cpp
+GUI/userInterface.cpp
+GUI/FEHGUI.cpp
+GUI/FEHGUI.h
+GUI/setStuff.h
+GUI/setStuff.cpp
